@@ -26,13 +26,13 @@ appVersion: "1.16.0"
 dependencies:
   - name: keycloakx
     version: 1.6.1
-    repository: "https://codecentric.github.io/helm-charts"
+    repository: https://codecentric.github.io/helm-charts
     condition: keycloakx.enabled
     tags:
       - keycloakx
   - name: postgresql
     version: 11.7.6
-    repository: "@bitnami"
+    repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
     tags:
       - postgresql
