@@ -46,7 +46,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args: [ "gunicorn", "sso.wsgi:application", "-w", "3", "--log-level", "debug" ]
+          {{- if .Values.args }}
+          args:
+            {{- toYaml .Values.args | nindent 12 }}
+          {{- else }}
+          args: [ "gunicorn", "sso.wsgi:application", "-w", "3", "--log-level", "info" ]
+          {{- end }}
           livenessProbe:
             httpGet:
               path: /

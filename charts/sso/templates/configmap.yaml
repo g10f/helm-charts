@@ -17,3 +17,5 @@ data:
   {{- if .Values.celeryBrokerURL }}
   CELERY_BROKER_URL: {{ .Values.celeryBrokerURL}}
   {{- end }}
+  RECAPTCHA_PRIVATE_KEY: {{ .Values.recaptchaPrivateKey | quote}}
+  SSO_GOOGLE_GEO_API_KEY: {{ .Values.ssoGoogleGeoApiKey | quote}}

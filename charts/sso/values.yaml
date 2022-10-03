@@ -26,7 +26,8 @@ extraEnv: ""
 
 # Additional environment variables for sso mapped from Secret or ConfigMap
 extraEnvFrom: ""
-
+recaptchaPrivateKey: ""
+ssoGoogleGeoApiKey: ""
 celeryBrokerURL: ""
 entryPoint: |
   {{- .Files.Get "scripts/docker-entrypoint.sh" }}
