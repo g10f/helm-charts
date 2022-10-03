@@ -27,6 +27,30 @@ entries:
   sso:
   - apiVersion: v2
     appVersion: 4.0.0
+    created: "2022-10-03T11:00:42.413933841Z"
+    dependencies:
+    - condition: memcached.enabled
+      name: memcached
+      repository: '@bitnami'
+      tags:
+      - memcached
+      version: 6.1.11
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: '@bitnami'
+      tags:
+      - postgresql
+      version: 11.7.6
+    description: G10F Identity Provider
+    digest: 26caf1731f89ddc29fc606b573bd2b74992251f3b7826994e696c2925141469f
+    icon: https://sso.g10f.de/apple-touch-icon.png
+    name: sso
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/sso-1.0.0/sso-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 4.0.0
     created: "2022-10-02T22:41:27.752017653Z"
     dependencies:
     - condition: memcached.enabled
@@ -49,4 +73,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/sso-0.1.1/sso-0.1.1.tgz
     version: 0.1.1
-generated: "2022-10-02T22:41:27.752024253Z"
+generated: "2022-10-03T11:00:42.413956641Z"
