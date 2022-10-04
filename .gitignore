@@ -3,3 +3,4 @@
 # described in https://git-scm.com/docs/gitignore
 tmp
 TODO.txt
+/charts/dummy/

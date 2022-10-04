@@ -6,6 +6,10 @@ metadata:
   name: {{ $fullName }}
   labels:
     {{- include "sso.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   rules:
     - host: {{ .Values.domain | quote }}
