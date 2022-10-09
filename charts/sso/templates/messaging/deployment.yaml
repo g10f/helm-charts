@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ include "sso.fullname" . }}-messaging
   labels:
-    {{- include "sso.labels" . | nindent 4 }}
+    {{- include "sso.labelsMessaging" . | nindent 4 }}
 spec:
   {{- if not .Values.messaging.autoscaling.enabled }}
   replicas: {{ .Values.messaging.replicaCount }}
@@ -49,20 +49,20 @@ spec:
             - mountPath: /opt/g10f/sso/htdocs/media
               name: media
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.messaging.resources | nindent 12 }}
       volumes:
         - name: media
           persistentVolumeClaim:
             claimName: {{ include "sso.fullname" . }}-media
-      {{- with .Values.nodeSelector }}
+      {{- with .Values.messaging.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with .Values.messaging.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with .Values.messaging.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

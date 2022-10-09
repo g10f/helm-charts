@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "sso.fullname" . }}-media
   labels:
-    {{- include "sso.labels" . | nindent 4 }}
+    {{- include "sso.labelsMedia" . | nindent 4 }}
 spec:
   {{- if not .Values.media.autoscaling.enabled }}
   replicas: {{ .Values.media.replicaCount }}
