@@ -1,0 +1,41 @@
+{{- range .Values.jobs }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ $.Release.Name }}-{{ .name }}
+  labels:
+    {{- include "wiki.labels" $ | nindent 4 }}
+spec:
+  schedule: {{ .schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: {{ $.Chart.Name }}
+              image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+              imagePullPolicy: {{ $.Values.image.pullPolicy }}
+              command:
+                {{- .command | toYaml | nindent 16 }}
+              env:
+                - name: WIKI_MAIL_SMARTHOST
+                  value: {{ $.Values.mail_smarthost }}
+                - name: WIKI_MAIL_FROM
+                  value: {{ $.Values.mail_from }}
+                {{- with $.Values.extraEnv }}
+                {{- tpl . $ | nindent 16 }}
+                {{- end }}
+              envFrom:
+                {{- with $.Values.extraEnvFrom }}
+                {{- tpl . $ | nindent 16 }}
+                {{- end }}
+              volumeMounts:
+                - mountPath: /opt/g10f/wiki/data
+                  name: data
+          restartPolicy: Never
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: {{ include "wiki.fullname" $ }}-data
+{{- end }}
