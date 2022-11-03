@@ -106,6 +106,8 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+extraIngresses: []
+
 resources: {}
   # limits:
   #   cpu: 100m

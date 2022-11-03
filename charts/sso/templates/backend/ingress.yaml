@@ -23,3 +23,19 @@ spec:
                 port:
                   number: 80
 {{- end }}
+{{- range .Values.extraIngresses }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .name | default .domain }}
+  labels:
+    {{- include "sso.labels" $ | nindent 4 }}
+  {{- with .annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  rules:
+    - host: {{ .domain | quote }}
+{{- end }}
