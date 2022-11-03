@@ -50,6 +50,30 @@ entries:
   sso:
   - apiVersion: v2
     appVersion: 3.3.6
+    created: "2022-11-03T20:23:13.792707572Z"
+    dependencies:
+    - condition: memcached.enabled
+      name: memcached
+      repository: '@bitnami'
+      tags:
+      - memcached
+      version: 6.1.11
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: '@bitnami'
+      tags:
+      - postgresql
+      version: 11.7.6
+    description: G10F Identity Provider
+    digest: f7b82b8b603043a08f93c86b7bcc5c6496f29bd390369a2b28e862f70135e919
+    icon: https://sso.g10f.de/apple-touch-icon.png
+    name: sso
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/sso-1.0.4/sso-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v2
+    appVersion: 3.3.6
     created: "2022-10-31T00:32:11.644722777Z"
     dependencies:
     - condition: memcached.enabled
@@ -171,6 +195,16 @@ entries:
   wiki:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-11-03T20:23:13.967325488Z"
+    description: A Helm chart for Kubernetes
+    digest: 82a68951951f8917a40d0bde6589a19adb9a7f107dde17bb6f998afa4a432683
+    name: wiki
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/wiki-1.0.0/wiki-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-10-31T00:32:11.795098562Z"
     description: A Helm chart for Kubernetes
     digest: b720b41b2aa35678be7c580325abee7b41865167546e66e50f8531f3df7bd3fa
@@ -179,4 +213,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/wiki-0.1.0/wiki-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-31T00:32:11.795119363Z"
+generated: "2022-11-03T20:23:13.967669991Z"
