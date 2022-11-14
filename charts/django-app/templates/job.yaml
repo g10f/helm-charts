@@ -1,0 +1,41 @@
+{{- range .Values.jobs }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ $.Release.Name }}-{{ .name }}
+  labels:
+    {{- include "django-app.labels" $ | nindent 4 }}
+spec:
+  schedule: {{ .schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: {{ $.Chart.Name }}
+              image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+              imagePullPolicy: {{ $.Values.image.pullPolicy }}
+              command:
+                {{- .command | toYaml | nindent 16 }}
+              env:
+                {{- with $.Values.extraEnv }}
+                {{- tpl . $ | nindent 16 }}
+                {{- end }}
+              envFrom:
+                {{- with $.Values.extraEnvFrom }}
+                {{- tpl . $ | nindent 16 }}
+                {{- end }}
+              {{- if .Values.media.enabled }}
+              volumeMounts:
+                - mountPath: {{ .Values.media.backendMountPath }}
+                  name: media
+              {{- end }}
+          restartPolicy: Never
+          {{- if .Values.media.enabled }}
+          volumes:
+            - name: media
+              persistentVolumeClaim:
+                claimName: {{ include "django-app.fullname" . }}-media
+          {{- end }}
+{{- end }}

@@ -38,7 +38,7 @@ spec:
           command:
             - /bin/sh
             - -c
-            - exec pg_isready -U {{ .Values.global.postgresql.auth.username }} -d "dbname={{ .Values.global.postgresql.auth.database }}" -h {{ printf "%s-postgresql" .Release.Name }} -p {{ .Values.postgresql.containerPorts.postgresql }}
+            - 'until pg_isready -U {{ .Values.global.postgresql.auth.username }} -d "dbname={{ .Values.global.postgresql.auth.database }}" -h {{ printf "%s-postgresql" .Release.Name }} -p {{ .Values.postgresql.containerPorts.postgresql }}; do sleep 2; done;'
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}

@@ -1,0 +1,24 @@
+{{- if .Values.media.enabled -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "django-app.fullname" . }}-media
+  labels:
+    {{- include "django-app.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/resource-policy": keep
+spec:
+  {{- if .Values.media.storageClass }}
+  storageClassName: {{ .Values.media.storageClass }}
+  {{- end }}
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.media.storageSize }}
+  {{- if .Values.media.dataSorceName }}
+  dataSource:
+    kind: PersistentVolumeClaim
+    name: {{ .Values.media.dataSorceName }}
+    {{- end }}
+{{- end }}

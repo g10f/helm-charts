@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "django-app.fullname" . }}
+  labels:
+    {{- include "django-app.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "django-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ tpl (toYaml .Values.configMaps) . | sha256sum }}
+        checksum/secrets: {{ tpl (toYaml .Values.secrets) . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "django-app.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "django-app.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if not .Values.postgresql.externalDatabaseHost }}
+      initContainers:
+        - name: check-db-ready
+          image: postgres:alpine
+          command:
+            - /bin/sh
+            - -c
+            - 'until pg_isready -U {{ .Values.global.postgresql.auth.username }} -d "dbname={{ .Values.global.postgresql.auth.database }}" -h {{ printf "%s-postgresql" .Release.Name }} -p {{ .Values.postgresql.containerPorts.postgresql }}; do sleep 2; done;'
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- with .Values.extraEnv }}
+            {{- tpl . $ | nindent 12 }}
+            {{- end }}
+          envFrom:
+            {{- with .Values.extraEnvFrom }}
+            {{- tpl . $ | nindent 12 }}
+            {{- end }}
+          {{- if .Values.media.enabled }}
+          volumeMounts:
+            - mountPath: {{ .Values.media.backendMountPath }}
+              name: media
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+              httpHeaders:
+                - name: Host
+                  value: {{ .Values.domain }}
+                - name: X-FORWARDED-SSL
+                  value: 'on'
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+              httpHeaders:
+                - name: Host
+                  value: {{ .Values.domain }}
+                - name: X-FORWARDED-SSL
+                  value: 'on'
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- if .Values.media.enabled }}
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: {{ include "django-app.fullname" . }}-media
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

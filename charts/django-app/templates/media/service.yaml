@@ -1,0 +1,16 @@
+{{- if .Values.media.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "django-app.fullname" . }}-media
+  labels:
+    {{- include "django-app.labels" . | nindent 4 }}
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "django-app.selectorLabelsMedia" . | nindent 4 }}
+{{- end }}

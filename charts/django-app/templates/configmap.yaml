@@ -1,0 +1,14 @@
+{{- $fullName := include "django-app.fullname" . -}}
+{{- range $nameSuffix, $values := .Values.configMaps }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}-{{ $nameSuffix }}
+  labels:
+    {{- include "django-app.labels" $ | nindent 4 }}
+{{- with $values.data }}
+data:
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+{{- end -}}

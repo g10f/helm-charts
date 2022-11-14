@@ -1,0 +1,61 @@
+{{- if .Values.media.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "django-app.fullname" . }}-media
+  labels:
+    {{- include "django-app.labelsMedia" . | nindent 4 }}
+spec:
+  {{- if not .Values.media.autoscaling.enabled }}
+  replicas: {{ .Values.media.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "django-app.selectorLabelsMedia" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.media.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "django-app.selectorLabelsMedia" . | nindent 8 }}
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - mountPath: {{ .Values.media.mediaMountPath }}
+              name: media
+          resources:
+            {{- toYaml .Values.media.resources | nindent 12 }}
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: {{ include "django-app.fullname" . }}-media
+      {{- with .Values.media.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.media.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.media.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

@@ -1,0 +1,118 @@
+# Default values for django-app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+domain: example.com
+replicaCount: 1
+
+image:
+  repository: g10f/oauth-python-sample
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+media:
+  enabled: false
+  # storageClass: nas
+  storageSize: 8Gi
+  backendMountPath: /opt/g10f/htdocs/media
+  mediaMountPath: /usr/share/nginx/html/media
+  replicaCount: 1
+  autoscaling:
+    enabled: false
+  ingress:
+    enabled: false
+
+# Configuration for secrets that should be created
+secrets: {}
+  # mysecret:
+  #   type: {}
+  #   stringData: {}
+  #   data: {}
+
+configMaps: {}
+  # myconfig:
+  #   data: {}
+
+# Additional environment variables for the wiki
+extraEnv: ""
+  # - name: WIKI_MAIL_FROM
+  #   value: wiki@example.com
+
+# Additional environment variables for the wiki mapped from Secret or ConfigMap
+extraEnvFrom: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - example.com
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+jobs: []
+
+tags:
+  postgresql: true
