@@ -1,6 +1,47 @@
 apiVersion: v1
 entries:
+  django-app:
+  - apiVersion: v2
+    appVersion: 2.0.4
+    created: "2022-11-14T08:31:47.949305638Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: '@bitnami'
+      tags:
+      - postgresql
+      version: 12.1.2
+    description: A Helm chart for Kubernetes
+    digest: 7647c6f35ed4da28be242927e561c8ffb006379d725f818340a0893087a6e41d
+    name: django-app
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/django-app-1.0.0/django-app-1.0.0.tgz
+    version: 1.0.0
   keycloak:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-11-14T08:31:48.128299555Z"
+    dependencies:
+    - condition: keycloakx.enabled
+      name: keycloakx
+      repository: '@codecentric'
+      tags:
+      - keycloakx
+      version: 1.6.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: '@bitnami'
+      tags:
+      - postgresql
+      version: 11.7.6
+    description: A Helm chart for Kubernetes
+    digest: 72c0aa1d5a5d39be78b6aa638992aba5f3dc4531cb103e7e7fb3f29e2ca1a001
+    name: keycloak
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/keycloak-1.1.2/keycloak-1.1.2.tgz
+    version: 1.1.2
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-10-03T17:28:30.110328889Z"
@@ -48,6 +89,30 @@ entries:
     - https://github.com/g10f/helm-charts/releases/download/keycloak-1.1.0/keycloak-1.1.0.tgz
     version: 1.1.0
   sso:
+  - apiVersion: v2
+    appVersion: 3.3.6
+    created: "2022-11-14T08:31:48.343807199Z"
+    dependencies:
+    - condition: memcached.enabled
+      name: memcached
+      repository: '@bitnami'
+      tags:
+      - memcached
+      version: 6.1.11
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: '@bitnami'
+      tags:
+      - postgresql
+      version: 11.7.6
+    description: G10F Identity Provider
+    digest: 6afc6a2df1dc63e31b5cabfc6e12cb92f8a8093b701bec0a32742c5f0121f2b0
+    icon: https://sso.g10f.de/apple-touch-icon.png
+    name: sso
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/sso-1.0.5/sso-1.0.5.tgz
+    version: 1.0.5
   - apiVersion: v2
     appVersion: 3.3.6
     created: "2022-11-03T20:23:13.792707572Z"
@@ -213,4 +278,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/wiki-0.1.0/wiki-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-03T20:23:13.967669991Z"
+generated: "2022-11-14T08:31:48.343851503Z"
