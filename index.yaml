@@ -3,6 +3,23 @@ entries:
   django-app:
   - apiVersion: v2
     appVersion: 2.0.4
+    created: "2022-12-05T16:53:46.03583206Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: '@bitnami'
+      tags:
+      - postgresql
+      version: 12.1.3
+    description: A Helm chart for Kubernetes
+    digest: 7e3ed37b89adcb16bb9eba60bc794ea1733e38549ebf3ff64683f16d3dbf149e
+    name: django-app
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/django-app-1.0.1/django-app-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 2.0.4
     created: "2022-11-14T08:31:47.949305638Z"
     dependencies:
     - condition: postgresql.enabled
@@ -19,6 +36,29 @@ entries:
     - https://github.com/g10f/helm-charts/releases/download/django-app-1.0.0/django-app-1.0.0.tgz
     version: 1.0.0
   keycloak:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-12-05T16:53:46.190689637Z"
+    dependencies:
+    - condition: keycloakx.enabled
+      name: keycloakx
+      repository: '@codecentric'
+      tags:
+      - keycloakx
+      version: 1.7.0
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: '@bitnami'
+      tags:
+      - postgresql
+      version: 11.9.13
+    description: A Helm chart for Kubernetes
+    digest: 29942868a0caadf4c3e3c57a923591c91e4e6acc1c17a88b7da8efdc39a95889
+    name: keycloak
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/keycloak-1.1.3/keycloak-1.1.3.tgz
+    version: 1.1.3
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-11-14T08:31:48.128299555Z"
@@ -89,6 +129,34 @@ entries:
     - https://github.com/g10f/helm-charts/releases/download/keycloak-1.1.0/keycloak-1.1.0.tgz
     version: 1.1.0
   sso:
+  - apiVersion: v2
+    appVersion: 3.3.6
+    created: "2022-12-05T16:53:46.418774597Z"
+    dependencies:
+    - condition: memcached.enabled
+      name: memcached
+      repository: '@bitnami'
+      tags:
+      - memcached
+      version: 6.3.1
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: '@bitnami'
+      tags:
+      - postgresql
+      version: 11.9.13
+    description: G10F Identity Provider
+    digest: 59d615d187c2972db6207d3dbe7567d6fe70afe017a1825e1f6069c8b372c463
+    icon: https://sso.g10f.de/apple-touch-icon.png
+    maintainers:
+    - email: mail@gunnar-scherf.de
+      name: Gunnar Scherf
+      url: https://gunnar-scherf.de
+    name: sso
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/sso-1.0.6/sso-1.0.6.tgz
+    version: 1.0.6
   - apiVersion: v2
     appVersion: 3.3.6
     created: "2022-11-14T08:31:48.343807199Z"
@@ -278,4 +346,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/wiki-0.1.0/wiki-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-14T08:31:48.343851503Z"
+generated: "2022-12-05T16:53:46.418862698Z"
