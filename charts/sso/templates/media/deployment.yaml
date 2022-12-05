@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:latest
+          image: "{{ .Values.media.image.repository }}:{{ .Values.media.image.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

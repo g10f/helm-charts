@@ -159,6 +159,12 @@ messaging:
     # targetMemoryUtilizationPercentage: 80
 
 media:
+  image:
+    repository: nginx
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+
   replicaCount: 1
   resources: {}
   nodeSelector: {}

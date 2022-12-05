@@ -1,9 +1,9 @@
 dependencies:
 - name: keycloakx
   repository: https://codecentric.github.io/helm-charts
-  version: 1.6.2
+  version: 1.7.0
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
-  version: 11.7.6
-digest: sha256:6e47d6171e4c5c210ffc16d308799b6a42ec8f19525c247f587bd79a76368c7b
-generated: "2022-11-13T23:42:50.972744725+01:00"
+  version: 11.9.13
+digest: sha256:a9fa55b15de6be5c3d07850fc992f6f9e030973fa45f36ba3a13896f966346de
+generated: "2022-12-04T21:44:56.891082966+01:00"
