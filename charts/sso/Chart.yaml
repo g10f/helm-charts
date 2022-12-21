@@ -1,6 +1,6 @@
 apiVersion: v2
 name: sso
-description: G10F Identity Provider
+description: G10F Single Sign-On
 maintainers:
   - name: Gunnar Scherf
     email: mail@gunnar-scherf.de
@@ -17,7 +17,7 @@ dependencies:
     tags:
       - memcached
   - name: postgresql
-    version: 11.9.13
+    version: 12.1.3
     repository: "@bitnami"
     condition: postgresql.enabled
     tags:
