@@ -31,15 +31,13 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if not .Values.postgresql.externalDatabaseHost }}
       initContainers:
         - name: check-db-ready
           image: postgres:alpine
           command:
             - /bin/sh
             - -c
-            - 'until pg_isready -U {{ .Values.global.postgresql.auth.username }} -d "dbname={{ .Values.global.postgresql.auth.database }}" -h {{ printf "%s-postgresql" .Release.Name }} -p {{ .Values.postgresql.containerPorts.postgresql }}; do sleep 2; done;'
-      {{- end }}
+            - 'until pg_isready -U {{ .Values.global.postgresql.auth.username }} -d "dbname={{ .Values.global.postgresql.auth.database }}" -h {{ .Values.postgresql.externalDatabaseHost | default (printf "%s-postgresql" .Release.Name ) }}; do sleep 2; done;'
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
