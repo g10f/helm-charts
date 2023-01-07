@@ -3,9 +3,11 @@
 # Declare variables to be passed into your templates.
 
 domain: "sso.g10f.de"
-# comma separated list of hosts, default is the value of domain if empty
 # storageClass: nas
 storageSize: 8Gi
+# Existing PVC to clone from
+dataSorceName: ""
+# comma separated list of hosts, default is the value of domain if empty
 allowedHosts: ""
 siteName: "G10F"
 serverEmail: '"G10F SSO" <webmaster@g10f.de>'
