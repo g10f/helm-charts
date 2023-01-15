@@ -148,6 +148,30 @@ entries:
   sso:
   - apiVersion: v2
     appVersion: 3.3.27
+    created: "2023-01-15T15:16:02.327742342Z"
+    dependencies:
+    - condition: memcached.enabled
+      name: memcached
+      repository: '@bitnami'
+      version: 6.3.5
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: '@bitnami'
+      version: 12.1.9
+    description: G10F Single Sign-On
+    digest: d28cecb3f3450b6041194575dcf33774ed71d408c7f92fe7a9b354e94a07e332
+    icon: https://sso.g10f.de/apple-touch-icon.png
+    maintainers:
+    - email: mail@gunnar-scherf.de
+      name: Gunnar Scherf
+      url: https://gunnar-scherf.de
+    name: sso
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/sso-1.0.10/sso-1.0.10.tgz
+    version: 1.0.10
+  - apiVersion: v2
+    appVersion: 3.3.27
     created: "2023-01-07T23:43:33.558261765Z"
     dependencies:
     - condition: memcached.enabled
@@ -447,4 +471,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/wiki-0.1.0/wiki-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-07T23:43:33.558579254Z"
+generated: "2023-01-15T15:16:02.328177147Z"
