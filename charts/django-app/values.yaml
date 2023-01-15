@@ -113,6 +113,3 @@ tolerations: []
 affinity: {}
 
 jobs: []
-
-tags:
-  postgresql: true
