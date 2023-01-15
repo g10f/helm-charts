@@ -38,6 +38,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-configmap
+            - secretRef:
+                name: {{ .Release.Name }}-secret
             {{- with .Values.extraEnvFrom }}
             {{- tpl . $ | nindent 12 }}
             {{- end }}
