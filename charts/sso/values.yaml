@@ -3,6 +3,8 @@
 # Declare variables to be passed into your templates.
 
 domain: "sso.g10f.de"
+# external Database Host Name, if postgres subchart is disabled
+databaseHost: ""
 # storageClass: nas
 storageSize: 8Gi
 # Existing PVC to clone from
@@ -45,7 +47,7 @@ global:
       database: sso
 
 postgresql:
-  externalDatabaseHost: ""
+  enabled: true
   primary:
     initdb:
       scripts:
@@ -182,8 +184,7 @@ media:
   ingress:
     enabled: true
 
-tags:
-  postgresql: true
-  memcached: true
+memcached:
+  enabled: true
 
 jobs: []
