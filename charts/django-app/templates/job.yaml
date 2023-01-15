@@ -26,16 +26,16 @@ spec:
                 {{- with $.Values.extraEnvFrom }}
                 {{- tpl . $ | nindent 16 }}
                 {{- end }}
-              {{- if .Values.media.enabled }}
+              {{- if $.Values.media.enabled }}
               volumeMounts:
-                - mountPath: {{ .Values.media.backendMountPath }}
+                - mountPath: {{ $.Values.media.backendMountPath }}
                   name: media
               {{- end }}
           restartPolicy: Never
-          {{- if .Values.media.enabled }}
+          {{- if $.Values.media.enabled }}
           volumes:
             - name: media
               persistentVolumeClaim:
-                claimName: {{ include "django-app.fullname" . }}-media
+                claimName: {{ include "django-app.fullname" $ }}-media
           {{- end }}
 {{- end }}
