@@ -14,6 +14,9 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+# docker command e.g. ["gunicorn", "django-app.wsgi:application", "-w", "2"]
+args: ""
+
 media:
   enabled: false
   # storageClass: nas
