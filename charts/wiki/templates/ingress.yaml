@@ -43,7 +43,7 @@ spec:
           {{- end }}
     {{- end }}
 ---
-# Ingress for with static path /moin_static1911
+# Ingress for static moin_static1911 and favicon
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -69,7 +69,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          - path: /moin_static1911
+          - path: /(moin_static1911|static|favicon.ico)
             pathType: Prefix
             backend:
               service:

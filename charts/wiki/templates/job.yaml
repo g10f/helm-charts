@@ -9,6 +9,9 @@ metadata:
 spec:
   schedule: {{ .schedule | quote }}
   jobTemplate:
+    metadata:
+      labels:
+        {{- include "wiki.labels" $ | nindent 8 }}
     spec:
       template:
         spec:
