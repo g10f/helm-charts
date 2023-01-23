@@ -9,8 +9,14 @@ metadata:
 spec:
   schedule: {{ .schedule | quote }}
   jobTemplate:
+    metadata:
+      labels:
+        {{- include "django-app.labels" $ | nindent 8 }}
     spec:
       template:
+        metadata:
+          labels:
+            {{- include "django-app.labels" $ | nindent 12 }}
         spec:
           containers:
             - name: {{ $.Chart.Name }}
