@@ -47,11 +47,6 @@ spec:
             {{- with .Values.extraEnvFrom }}
             {{- tpl . $ | nindent 12 }}
             {{- end }}
-          {{- if .Values.media.enabled }}
-          volumeMounts:
-            - mountPath: {{ .Values.media.backendMountPath }}
-              name: media
-          {{- end }}
           ports:
             - name: http
               containerPort: 8000
@@ -77,6 +72,10 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
+            {{- if .Values.media.enabled }}
+            - mountPath: {{ .Values.media.backendMountPath }}
+              name: media
+            {{- end }}
             {{- with .Values.extraVolumeMounts }}
             {{- tpl . $ | nindent 12 }}
             {{- end }}
