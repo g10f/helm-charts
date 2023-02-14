@@ -123,4 +123,6 @@ tolerations: []
 
 affinity: {}
 
+podDisruptionBudget: {}
+
 jobs: []
