@@ -3,6 +3,16 @@ entries:
   django-app:
   - apiVersion: v2
     appVersion: 2.0.4
+    created: "2023-02-14T19:14:37.59785249Z"
+    description: A Helm chart for Kubernetes
+    digest: 458541496ec18a1235deaceb0908b314aeb775687cef8e42bdcee565fb129dde
+    name: django-app
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/django-app-1.0.10/django-app-1.0.10.tgz
+    version: 1.0.10
+  - apiVersion: v2
+    appVersion: 2.0.4
     created: "2023-02-12T11:45:58.549955007Z"
     description: A Helm chart for Kubernetes
     digest: 4653e952b32ecb44eca787b639b641fe7ed6e0566e9e8ac363b660ef9adab7ad
@@ -565,4 +575,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/wiki-0.1.0/wiki-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-12T11:45:58.550297905Z"
+generated: "2023-02-14T19:14:37.597924391Z"
