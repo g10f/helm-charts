@@ -14,6 +14,9 @@ allowedHosts: ""
 siteName: "G10F"
 serverEmail: '"G10F SSO" <webmaster@g10f.de>'
 secretKey: "changeme"
+recaptchaPrivateKey: ""
+ssoGoogleGeoApiKey: ""
+celeryBrokerURL: ""
 django:
   loadInitialData: "on"
   migrate: "on"
@@ -28,11 +31,20 @@ extraEnv: ""
 #  - name: EMAIL_PORT
 #    value: 587
 
-# Additional environment variables for sso mapped from Secret or ConfigMap
+# Configuration for secrets that should be created
+secrets: {}
+  # mysecret:
+  #   type: {}
+  #   stringData: {}
+  #   data: {}
+
+configMaps: {}
+  # myconfig:
+  #   data: {}
+
+# Additional environment variables for the wiki mapped from Secret or ConfigMap
 extraEnvFrom: ""
-recaptchaPrivateKey: ""
-ssoGoogleGeoApiKey: ""
-celeryBrokerURL: ""
+
 entryPoint: |
   {{- .Files.Get "scripts/docker-entrypoint.sh" }}
 

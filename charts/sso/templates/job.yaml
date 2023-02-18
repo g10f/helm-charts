@@ -23,6 +23,9 @@ spec:
                     name: {{ $.Release.Name }}-configmap
                 - secretRef:
                     name: {{ $.Release.Name }}-secret
+                {{- with $.Values.extraEnvFrom }}
+                {{- tpl . $ | nindent 16 }}
+                {{- end }}
               volumeMounts:
                 - mountPath: /opt/g10f/sso/htdocs/media
                   name: media
