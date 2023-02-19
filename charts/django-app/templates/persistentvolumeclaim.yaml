@@ -16,9 +16,9 @@ spec:
   resources:
     requests:
       storage: {{ .Values.media.storageSize }}
-  {{- if .Values.media.dataSorceName }}
+  {{- if .Values.media.dataSourceName }}
   dataSource:
     kind: PersistentVolumeClaim
-    name: {{ .Values.media.dataSorceName }}
+    name: {{ .Values.media.dataSourceName }}
     {{- end }}
 {{- end }}

@@ -17,6 +17,11 @@ fullnameOverride: ""
 mail_smarthost: localhost
 mail_from: ""
 
+storageClass: ""
+storageSize: 8Gi
+# Existing PVC to clone from
+dataSourceName: ""
+
 # Configuration for secrets that should be created
 secrets: {}
   # mysecret:

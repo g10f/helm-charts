@@ -19,8 +19,11 @@ args: ""
 
 media:
   enabled: false
-  # storageClass: nas
+  # storageClass e.g. nas
+  storageClass: ""
   storageSize: 8Gi
+  # Existing PVC to clone from
+  dataSourceName: ""
   backendMountPath: /opt/g10f/htdocs/media
   mediaMountPath: /usr/share/nginx/html/media
   replicaCount: 1

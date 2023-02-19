@@ -4,19 +4,14 @@
 
 domain: "sso.g10f.de"
 # external Database Host Name, if postgres subchart is disabled
-databaseHost: ""
+# databaseHost: ""
 # storageClass: nas
 storageSize: 8Gi
 # Existing PVC to clone from
-dataSorceName: ""
+dataSourceName: ""
 # comma separated list of hosts, default is the value of domain if empty
 allowedHosts: ""
-siteName: "G10F"
-serverEmail: '"G10F SSO" <webmaster@g10f.de>'
-secretKey: "changeme"
-recaptchaPrivateKey: ""
-ssoGoogleGeoApiKey: ""
-celeryBrokerURL: ""
+
 django:
   loadInitialData: "on"
   migrate: "on"
@@ -51,27 +46,6 @@ entryPoint: |
 localSettings:
   local_settings.py: |
     {{- .Files.Get "settings/local_settings.py" }}
-global:
-  postgresql:
-    auth:
-      username: sso
-      password: sso
-      database: sso
-
-postgresql:
-  enabled: true
-  primary:
-    initdb:
-      scripts:
-        my_init_script.sh: |
-          #!/bin/bash
-          set -ex
-          export PGUSER=postgres
-          echo "Loading extensions into $POSTGRES_DB"
-          psql --dbname="$POSTGRES_DB" <<-'EOSQL'
-          CREATE EXTENSION IF NOT EXISTS postgis;
-          CREATE EXTENSION IF NOT EXISTS citext;
-          EOSQL
 
 replicaCount: 1
 image:
@@ -161,6 +135,7 @@ tolerations: []
 affinity: {}
 podDisruptionBudget: {}
 messaging:
+  enabled: true
   replicaCount: 1
   resources: {}
   nodeSelector: {}

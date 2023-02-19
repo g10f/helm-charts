@@ -1,4 +1,4 @@
-{{- if .Values.celeryBrokerURL -}}
+{{- if .Values.messaging.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,10 +37,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: [ "celery", "-A", "sso", "worker", "-c", "1", "-l", "info", "--without-gossip", "--without-mingle", "--without-heartbeat" ]
           envFrom:
-            - configMapRef:
-                name: {{ .Release.Name }}-configmap
-            - secretRef:
-                name: {{ .Release.Name }}-secret
             {{- with .Values.extraEnvFrom }}
             {{- tpl . $ | nindent 12 }}
             {{- end }}
