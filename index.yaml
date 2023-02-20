@@ -238,6 +238,26 @@ entries:
   sso:
   - apiVersion: v2
     appVersion: 3.3.34
+    created: "2023-02-20T16:22:56.619078236Z"
+    dependencies:
+    - condition: memcached.enabled
+      name: memcached
+      repository: '@bitnami'
+      version: 6.3.7
+    description: G10F Single Sign-On
+    digest: 9180c6f99f8f486cffd3e9663e45f29a90e820ae63f716e5f4c87765eff312c8
+    icon: https://sso.g10f.de/apple-touch-icon.png
+    maintainers:
+    - email: mail@gunnar-scherf.de
+      name: Gunnar Scherf
+      url: https://gunnar-scherf.de
+    name: sso
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/sso-1.0.16/sso-1.0.16.tgz
+    version: 1.0.16
+  - apiVersion: v2
+    appVersion: 3.3.34
     created: "2023-02-19T13:50:51.518366867Z"
     dependencies:
     - condition: memcached.enabled
@@ -659,6 +679,16 @@ entries:
   wiki:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-02-20T16:22:56.770195793Z"
+    description: A Helm chart for Kubernetes
+    digest: e87b013d0384f18f5d6cc01862c9caf88c2b2c32a287581193440767430a7255
+    name: wiki
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/wiki-1.0.3/wiki-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-02-19T13:50:51.674189797Z"
     description: A Helm chart for Kubernetes
     digest: f18dc6026901ada83d6d1dbf21920775ece451cc5f6bfae4f0f3e0a831fad3e8
@@ -697,4 +727,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/wiki-0.1.0/wiki-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-19T13:50:51.674516197Z"
+generated: "2023-02-20T16:22:56.770387895Z"
