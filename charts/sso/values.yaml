@@ -154,7 +154,7 @@ media:
     repository: nginx
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "latest"
+    tag: "1.23.3"
 
   replicaCount: 1
   resources: {}

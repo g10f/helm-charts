@@ -40,10 +40,12 @@ spec:
             {{- with .Values.extraEnvFrom }}
             {{- tpl . $ | nindent 12 }}
             {{- end }}
+          {{- if .Values.extraEnv }}
           env:
             {{- with .Values.extraEnv }}
             {{- tpl . $ | nindent 12 }}
             {{- end }}
+          {{- end }}
           volumeMounts:
             - mountPath: /opt/g10f/sso/htdocs/media
               name: media

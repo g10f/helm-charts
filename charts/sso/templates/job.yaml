@@ -22,6 +22,12 @@ spec:
                 {{- with $.Values.extraEnvFrom }}
                 {{- tpl . $ | nindent 16 }}
                 {{- end }}
+              {{- if .extraEnv }}
+              env:
+                {{- with .extraEnv }}
+                {{- tpl . $ | nindent 16 }}
+                {{- end }}
+              {{- end }}
               volumeMounts:
                 - mountPath: /opt/g10f/sso/htdocs/media
                   name: media
