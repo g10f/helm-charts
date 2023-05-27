@@ -19,6 +19,10 @@ args: ""
 
 media:
   enabled: false
+  image:
+    repository: nginx
+    pullPolicy: IfNotPresent
+    tag: latest
   # storageClass e.g. nas
   storageClass: ""
   storageSize: 8Gi
