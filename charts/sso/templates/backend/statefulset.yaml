@@ -45,6 +45,7 @@ spec:
           args: [ "gunicorn", "sso.wsgi:application", "-w", "3", "--log-level", "info" ]
           {{- end }}
           livenessProbe:
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
             httpGet:
               path: /
               port: 8000

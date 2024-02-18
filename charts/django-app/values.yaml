@@ -17,6 +17,9 @@ fullnameOverride: ""
 # docker command e.g. ["gunicorn", "django-app.wsgi:application", "-w", "2"]
 args: ""
 
+livenessProbe:
+  timeoutSeconds: 2
+
 media:
   enabled: false
   image:

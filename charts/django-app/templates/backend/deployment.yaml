@@ -52,6 +52,7 @@ spec:
               containerPort: 8000
               protocol: TCP
           livenessProbe:
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
             httpGet:
               path: /
               port: http
