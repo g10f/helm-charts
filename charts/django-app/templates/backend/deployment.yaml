@@ -62,6 +62,7 @@ spec:
                 - name: X-FORWARDED-SSL
                   value: 'on'
           readinessProbe:
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
             httpGet:
               path: /
               port: http

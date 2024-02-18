@@ -19,6 +19,8 @@ args: ""
 
 livenessProbe:
   timeoutSeconds: 2
+readinessProbe:
+  timeoutSeconds: 2
 
 media:
   enabled: false
