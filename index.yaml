@@ -3,6 +3,16 @@ entries:
   django-app:
   - apiVersion: v2
     appVersion: 2.0.9
+    created: "2024-02-18T15:25:40.8709393Z"
+    description: A Helm chart for Kubernetes
+    digest: 11ab1a3289193ffa6a82f4c02b6b915cd01879970d2317e72431539e0269aace
+    name: django-app
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/django-app-1.1.0/django-app-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 2.0.9
     created: "2023-05-27T16:20:13.33166363Z"
     description: A Helm chart for Kubernetes
     digest: 5ea9470dbea05e16429c320750da717acc8239d705f044fdf5fe14d42bda6560
@@ -246,6 +256,26 @@ entries:
     - https://github.com/g10f/helm-charts/releases/download/keycloak-1.1.0/keycloak-1.1.0.tgz
     version: 1.1.0
   sso:
+  - apiVersion: v2
+    appVersion: 4.6.6
+    created: "2024-02-18T15:25:40.965172791Z"
+    dependencies:
+    - condition: memcached.enabled
+      name: memcached
+      repository: '@bitnami'
+      version: 6.11.1
+    description: G10F Single Sign-On
+    digest: 9c5855157b8ab8ba94a65714fb5e1b72817cef6519a7351295976ba8ed6eccef
+    icon: https://sso.g10f.de/apple-touch-icon.png
+    maintainers:
+    - email: mail@gunnar-scherf.de
+      name: Gunnar Scherf
+      url: https://gunnar-scherf.de
+    name: sso
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/sso-1.1.5/sso-1.1.5.tgz
+    version: 1.1.5
   - apiVersion: v2
     appVersion: 4.6.6
     created: "2024-02-17T13:12:23.750590659Z"
@@ -897,4 +927,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/wiki-0.1.0/wiki-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-17T13:12:23.750783998Z"
+generated: "2024-02-18T15:25:40.965449804Z"
