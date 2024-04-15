@@ -11,6 +11,10 @@ storageSize: 8Gi
 dataSourceName: ""
 # comma separated list of hosts, default is the value of domain if empty
 allowedHosts: ""
+# Overrides the default entrypoint of the sso container
+command: []
+# Overrides the default args for the sso container
+args: []
 
 django:
   loadInitialData: "on"
