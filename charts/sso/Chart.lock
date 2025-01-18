@@ -1,6 +1,6 @@
 dependencies:
 - name: memcached
   repository: https://charts.bitnami.com/bitnami
-  version: 7.4.8
-digest: sha256:3bcdc08c8758d4180040d6aa87af5c011a0b04e9ed7342ba7ad7ffcef5aed77a
-generated: "2024-07-10T14:04:07.902219888+02:00"
+  version: 7.6.1
+digest: sha256:76b37906dd662b1bbad1d03af3a717dc2857d12618388c8f6b7e2464ff6b12d3
+generated: "2025-01-18T16:01:27.016040927+01:00"
