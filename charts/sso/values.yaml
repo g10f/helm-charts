@@ -44,6 +44,12 @@ configMaps: {}
 # Additional environment variables for the wiki mapped from Secret or ConfigMap
 extraEnvFrom: ""
 
+# Add additional volumes
+extraVolumes: ""
+
+# Add additional volumes mounts
+extraVolumeMounts: ""
+
 entryPoint: |
   {{- .Files.Get "scripts/docker-entrypoint.sh" }}
 

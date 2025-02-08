@@ -98,6 +98,9 @@ spec:
               subPath: docker-entrypoint.sh
               readOnly: true
             {{- end }}
+            {{- with .Values.extraVolumeMounts }}
+            {{- tpl . $ | nindent 12 }}
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
@@ -109,6 +112,9 @@ spec:
           configMap:
             name: {{ include "sso.fullname" . }}-entrypoint
             defaultMode: 0555
+        {{- end }}
+        {{- with .Values.extraVolumes }}
+        {{- tpl . $ | nindent 8 }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
