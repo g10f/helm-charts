@@ -51,6 +51,14 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
+{{- define "django-app.labelsJob" -}}
+helm.sh/chart: {{ include "django-app.chart" . }}
+{{ include "django-app.selectorLabelsJob" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
 
 {{/*
 Selector labels
@@ -65,6 +73,10 @@ app.kubernetes.io/name: {{ include "django-app.name" . }}-media
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
+{{- define "django-app.selectorLabelsJob" -}}
+app.kubernetes.io/name: {{ include "django-app.name" . }}-job
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
 
 {{/*
 Create the name of the service account to use

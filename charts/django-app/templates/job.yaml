@@ -5,18 +5,18 @@ kind: CronJob
 metadata:
   name: {{ $.Release.Name }}-{{ .name }}
   labels:
-    {{- include "django-app.labels" $ | nindent 4 }}
+    {{- include "django-app.labelsJob" $ | nindent 4 }}
 spec:
   schedule: {{ .schedule | quote }}
   jobTemplate:
     metadata:
       labels:
-        {{- include "django-app.labels" $ | nindent 8 }}
+        {{- include "django-app.labelsJob" $ | nindent 8 }}
     spec:
       template:
         metadata:
           labels:
-            {{- include "django-app.labels" $ | nindent 12 }}
+            {{- include "django-app.labelsJob" $ | nindent 12 }}
         spec:
           containers:
             - name: {{ $.Chart.Name }}
