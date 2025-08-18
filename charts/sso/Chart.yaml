@@ -6,11 +6,11 @@ maintainers:
     email: mail@gunnar-scherf.de
     url: https://gunnar-scherf.de
 type: application
-version: 1.1.10
-appVersion: 4.8.14
+version: 1.1.11
+appVersion: 5.1.9
 icon: https://sso.g10f.de/apple-touch-icon.png
 dependencies:
   - name: memcached
-    version: 7.6.3
+    version: 7.9.7
     repository: "@bitnami"
     condition: memcached.enabled
