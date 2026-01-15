@@ -12,5 +12,5 @@ icon: https://sso.g10f.de/apple-touch-icon.png
 dependencies:
   - name: memcached
     version: 7.9.7
-    repository: "@bitnami"
+    repository: https://charts.bitnami.com/bitnami
     condition: memcached.enabled
