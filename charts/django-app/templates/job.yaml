@@ -18,7 +18,7 @@ spec:
           labels:
             {{- include "django-app.labelsJob" $ | nindent 12 }}
         spec:
-          {{- with .Values.imagePullSecrets }}
+          {{- with $.Values.imagePullSecrets }}
           imagePullSecrets:
             {{- toYaml . | nindent 12 }}
           {{- end }}
