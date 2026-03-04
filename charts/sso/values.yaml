@@ -93,6 +93,18 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+middlewares: []
+# - name: my-redirect-https
+#   spec:
+#     redirectScheme:
+#       scheme: https
+#       permanent: true
+# - name: my-headers
+#   spec:
+#     headers:
+#       customResponseHeaders:
+#         X-Frame-Options: DENY
+
 ingress:
   enabled: true
   className: ""
@@ -108,6 +120,22 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+# Traefik IngressRoute (alternative to ingress above).
+# match defaults to Host(`<domain>`) if not set.
+ingressRoute:
+  enabled: false
+  entryPoints:
+    - websecure
+  match: ""
+  middlewares: []
+  # - name: my-redirect-https
+  # - name: cross-namespace-middleware
+  #   namespace: traefik
+  tls: {}
+  # secretName: my-tls-secret
+  # certResolver: letsencrypt
+  annotations: {}
 
 extraIngresses: []
 
@@ -182,6 +210,17 @@ media:
     # targetMemoryUtilizationPercentage: 80
   ingress:
     enabled: true
+  # Traefik IngressRoute for the media server (alternative to media.ingress above).
+  # match defaults to Host(`<domain>`) && PathPrefix(`/media`) if not set.
+  ingressRoute:
+    enabled: false
+    entryPoints:
+      - websecure
+    match: ""
+    middlewares: []
+    # - name: media-cache-headers
+    tls: {}
+    annotations: {}
 
 memcached:
   enabled: true

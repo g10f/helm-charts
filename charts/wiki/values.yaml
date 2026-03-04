@@ -65,6 +65,13 @@ service:
   type: ClusterIP
   port: 80
 
+middlewares: []
+# - name: my-redirect-https
+#   spec:
+#     redirectScheme:
+#       scheme: https
+#       permanent: true
+
 ingress:
   enabled: false
   className: ""
@@ -80,6 +87,23 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+# Traefik IngressRoute (alternative to ingress above).
+# match defaults to Host(`<ingress.hosts[0].host>`) if not set.
+# The static route (moin_static1911, static, favicon.ico) is rendered as a
+# separate higher-priority route. Use staticMiddlewares to attach middleware
+# only to those paths (e.g. cache-control headers).
+ingressRoute:
+  enabled: false
+  entryPoints:
+    - websecure
+  match: ""
+  middlewares: []
+  staticMiddlewares: []
+  tls: {}
+  # secretName: my-tls-secret
+  # certResolver: letsencrypt
+  annotations: {}
 
 resources: {}
   # limits:
