@@ -1,0 +1,36 @@
+{{- if .Values.media.ingressRoute.enabled -}}
+{{- $fullName := include "sso.fullname" . -}}
+{{- $match := .Values.media.ingressRoute.match | default (printf "Host(`%s`) && PathPrefix(`/media`)" .Values.domain) -}}
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ $fullName }}-media
+  labels:
+    {{- include "sso.labelsMedia" . | nindent 4 }}
+  {{- with .Values.media.ingressRoute.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  entryPoints:
+    {{- toYaml .Values.media.ingressRoute.entryPoints | nindent 4 }}
+  routes:
+    - match: {{ $match }}
+      kind: Rule
+      {{- with .Values.media.ingressRoute.middlewares }}
+      middlewares:
+        {{- range . }}
+        - name: {{ .name }}
+          {{- with .namespace }}
+          namespace: {{ . }}
+          {{- end }}
+        {{- end }}
+      {{- end }}
+      services:
+        - name: {{ $fullName }}-media
+          port: 80
+  {{- with .Values.media.ingressRoute.tls }}
+  tls:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}

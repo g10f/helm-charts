@@ -40,6 +40,17 @@ media:
     enabled: false
   ingress:
     enabled: false
+  # Traefik IngressRoute for the media server (alternative to media.ingress above).
+  # match defaults to Host(`<domain>`) && PathPrefix(`/media`) if not set.
+  ingressRoute:
+    enabled: false
+    entryPoints:
+      - websecure
+    match: ""
+    middlewares: []
+    # - name: media-cache-headers
+    tls: {}
+    annotations: {}
 
 # Configuration for secrets that should be created
 secrets: {}
@@ -92,6 +103,19 @@ service:
   type: ClusterIP
   port: 80
 
+middlewares: []
+# - name: my-redirect-https
+#   spec:
+#     redirectScheme:
+#       scheme: https
+#       permanent: true
+# - name: media-cache-headers
+#   spec:
+#     headers:
+#       customResponseHeaders:
+#         Cache-Control: "max-age=315360000, public, immutable"
+#         Access-Control-Allow-Origin: "*"
+
 ingress:
   enabled: false
   className: ""
@@ -107,6 +131,22 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - example.com
+
+# Traefik IngressRoute (alternative to ingress above).
+# match defaults to Host(`<domain>`) if not set.
+ingressRoute:
+  enabled: false
+  entryPoints:
+    - websecure
+  match: ""
+  middlewares: []
+  # - name: my-redirect-https
+  # - name: cross-namespace-middleware
+  #   namespace: traefik
+  tls: {}
+  # secretName: my-tls-secret
+  # certResolver: letsencrypt
+  annotations: {}
 
 extraIngresses: []
 
