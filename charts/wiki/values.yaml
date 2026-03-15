@@ -127,3 +127,48 @@ tolerations: []
 affinity: {}
 
 jobs: []
+
+# Nginx sidecar container — enabled automatically when ingressRoute.enabled is true.
+# Acts as a reverse proxy in front of the Django/gunicorn container so that
+# nginx-specific behaviour (body size limits, header manipulation, etc.) can be
+# configured without relying on ingress-nginx annotations.
+nginx:
+  image:
+    repository: public.ecr.aws/nginx/nginx
+    tag: 1.28-alpine
+    pullPolicy: IfNotPresent
+  # Full contents of /etc/nginx/conf.d/default.conf inside the sidecar.
+  config: |
+    server {
+        listen 80;
+        client_max_body_size 20m;
+        server_tokens off;
+
+        add_header X-XSS-Protection "1" always;
+
+        # Capture the wiki name (first path segment) and pass it as SCRIPT_NAME
+        # so moin wiki knows its own base URL (e.g. /general, /centerbs, …).
+        # Mirrors the nginx-ingress configuration-snippet:
+        #   proxy_set_header SCRIPT_NAME /$1;
+        location ~ ^/(?!static|moin_static1911|favicon\.ico)([^/]+) {
+            proxy_pass http://localhost:8000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header SCRIPT_NAME /$1;
+        }
+
+        location ~ ^/$ {
+            return 301 https://$server_name/general/;
+        }
+
+        location / {
+            proxy_pass http://localhost:8000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+  resources: {}
