@@ -23,6 +23,15 @@ django:
   adminName: "admin"
   adminPassword: "changeme"
 
+# Run "manage.py migrate" in a Job before an upgrade (Helm pre-upgrade hook, Argo CD PreSync hook).
+# Without it pod -0 migrates in its entrypoint, but a rolling update replaces it last, so until then
+# the already updated pods run against the old database schema.
+# Not for the first install: the hook runs before the config map and secrets of extraEnvFrom exist.
+migrationJob:
+  enabled: false
+  backoffLimit: 0
+  activeDeadlineSeconds: 600
+
 # Additional environment variables for sso
 extraEnv: ""
 #  - name: EMAIL_HOST
