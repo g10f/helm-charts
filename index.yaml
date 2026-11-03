@@ -3,6 +3,16 @@ entries:
   django-app:
   - apiVersion: v2
     appVersion: 2.4.2
+    created: "2026-11-03T10:16:54.200114648Z"
+    description: A Helm chart for Kubernetes
+    digest: 3ff945ba87c3c1e78ede87254404644faca6f97cce52f93ed36fafd670d59540
+    name: django-app
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/django-app-1.2.1/django-app-1.2.1.tgz
+    version: 1.2.1
+  - apiVersion: v2
+    appVersion: 2.4.2
     created: "2026-03-04T19:54:32.490249261Z"
     description: A Helm chart for Kubernetes
     digest: 5f415a99d3acb5641c5ba845c1f8438e22dc049a4dc3f22ebbd1b7169ac0ddf4
@@ -286,6 +296,26 @@ entries:
     - https://github.com/g10f/helm-charts/releases/download/keycloak-1.1.0/keycloak-1.1.0.tgz
     version: 1.1.0
   sso:
+  - apiVersion: v2
+    appVersion: 5.2.3
+    created: "2026-11-03T10:16:54.355482579Z"
+    dependencies:
+    - condition: memcached.enabled
+      name: memcached
+      repository: https://charts.bitnami.com/bitnami
+      version: 7.9.7
+    description: G10F Single Sign-On
+    digest: d074622f77a4859757290e118f4da141297725688bbc4e650d29802e3de8c076
+    icon: https://sso.g10f.de/apple-touch-icon.png
+    maintainers:
+    - email: mail@gunnar-scherf.de
+      name: Gunnar Scherf
+      url: https://gunnar-scherf.de
+    name: sso
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/sso-1.3.1/sso-1.3.1.tgz
+    version: 1.3.1
   - apiVersion: v2
     appVersion: 5.2.3
     created: "2026-10-17T16:07:02.113755387Z"
@@ -1069,6 +1099,16 @@ entries:
   wiki:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2026-11-03T10:16:54.509250657Z"
+    description: A Helm chart for Kubernetes
+    digest: f9d3f63091b019c24ea1930440c9d8914fe2676081baa4f2ebdbfccb92905146
+    name: wiki
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/wiki-1.1.2/wiki-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2026-03-15T11:28:23.87388833Z"
     description: A Helm chart for Kubernetes
     digest: 64264882574de3d00a56790c15f81d2a43c683e5a1f716eb5c07e5ed0532fd69
@@ -1137,4 +1177,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/wiki-0.1.0/wiki-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-17T16:07:02.114217333Z"
+generated: "2026-11-03T10:16:54.509748226Z"
