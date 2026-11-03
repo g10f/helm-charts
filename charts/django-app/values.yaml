@@ -177,4 +177,10 @@ affinity: {}
 
 podDisruptionBudget: {}
 
+# Resources of the containers of the CronJobs below; a job overrides them with its own "resources".
+jobResources: {}
+  # requests:
+  #   cpu: 10m
+  #   memory: 128Mi
+
 jobs: []

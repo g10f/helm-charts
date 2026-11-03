@@ -37,6 +37,10 @@ spec:
                 {{- with $.Values.extraEnvFrom }}
                 {{- tpl . $ | nindent 16 }}
                 {{- end }}
+              {{- with (.resources | default $.Values.jobResources) }}
+              resources:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
               {{- if $.Values.media.enabled }}
               volumeMounts:
                 - mountPath: {{ $.Values.media.backendMountPath }}

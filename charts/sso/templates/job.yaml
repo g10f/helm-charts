@@ -32,6 +32,10 @@ spec:
                 {{- tpl . $ | nindent 16 }}
                 {{- end }}
               {{- end }}
+              {{- with (.resources | default $.Values.jobResources) }}
+              resources:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
               volumeMounts:
                 - mountPath: /opt/g10f/sso/htdocs/media
                   name: media

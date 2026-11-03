@@ -126,6 +126,12 @@ tolerations: []
 
 affinity: {}
 
+# Resources of the containers of the CronJobs below; a job overrides them with its own "resources".
+jobResources: {}
+  # requests:
+  #   cpu: 10m
+  #   memory: 128Mi
+
 jobs: []
 
 # Nginx sidecar container — enabled automatically when ingressRoute.enabled is true.
