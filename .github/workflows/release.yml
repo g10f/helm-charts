@@ -32,6 +32,25 @@ jobs:
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
 
+      - name: Warn about changed charts without a new version
+        run: |
+          for chart_yaml in charts/*/Chart.yaml; do
+            chart_dir=$(dirname "$chart_yaml")
+            name=$(sed -n 's/^name: *//p' "$chart_yaml")
+            version=$(sed -n 's/^version: *//p' "$chart_yaml")
+            tag="$name-$version"
+
+            # No release for this version yet: chart-releaser publishes it, nothing to warn about.
+            if ! git rev-parse --quiet --verify "refs/tags/$tag" >/dev/null; then
+              continue
+            fi
+
+            # This version is already released, but the chart files differ from it: the version bump is missing.
+            if ! git diff --quiet "$tag" HEAD -- "$chart_dir"; then
+              echo "::warning file=$chart_yaml::$name has changed since release $tag, but its version was not raised. The change is only published after the version in Chart.yaml is increased."
+            fi
+          done
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
