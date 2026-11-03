@@ -34,5 +34,9 @@ jobs:
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
+        with:
+          # A chart that changed without a version bump already has its release; skip it instead of
+          # failing the whole run (and with it the release of the other charts).
+          skip_existing: true
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
