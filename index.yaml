@@ -1099,6 +1099,16 @@ entries:
   wiki:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2026-11-19T12:27:12.609751162Z"
+    description: A Helm chart for Kubernetes
+    digest: 2282743a1b21ad2b8d7e34b3d96c208812b262edb7e5e9c7fc2f9080678cac6a
+    name: wiki
+    type: application
+    urls:
+    - https://github.com/g10f/helm-charts/releases/download/wiki-1.1.3/wiki-1.1.3.tgz
+    version: 1.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2026-11-03T10:16:54.509250657Z"
     description: A Helm chart for Kubernetes
     digest: f9d3f63091b019c24ea1930440c9d8914fe2676081baa4f2ebdbfccb92905146
@@ -1177,4 +1187,4 @@ entries:
     urls:
     - https://github.com/g10f/helm-charts/releases/download/wiki-0.1.0/wiki-0.1.0.tgz
     version: 0.1.0
-generated: "2026-11-03T10:16:54.509748226Z"
+generated: "2026-11-19T12:27:12.609843373Z"
