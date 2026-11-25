@@ -92,6 +92,7 @@ serviceAccount:
 
 podAnnotations: {}
 
+# Pod and container securityContext of the backend, the messaging worker, the migration job and the CronJobs
 podSecurityContext: {}
   # fsGroup: 2000
 
@@ -205,6 +206,19 @@ media:
     repository: nginx
     pullPolicy: IfNotPresent
     tag: latest
+  # Port nginx listens on. 8080 for an unprivileged image such as nginxinc/nginx-unprivileged; the Service
+  # keeps port 80.
+  containerPort: 80
+  podSecurityContext: {}
+    # runAsNonRoot: true
+    # runAsUser: 101
+    # seccompProfile:
+    #   type: RuntimeDefault
+  securityContext: {}
+    # allowPrivilegeEscalation: false
+    # capabilities:
+    #   drop:
+    #   - ALL
 
   replicaCount: 1
   resources: {}

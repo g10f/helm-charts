@@ -75,6 +75,20 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
+Labels of the CronJob pods: not the selector labels of the backend, so that the services and the
+pod disruption budget do not select them
+*/}}
+{{- define "sso.labelsJob" -}}
+helm.sh/chart: {{ include "sso.chart" . }}
+app.kubernetes.io/name: {{ include "sso.name" . }}-job
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
 Selector labels
 */}}
 {{- define "sso.selectorLabels" -}}

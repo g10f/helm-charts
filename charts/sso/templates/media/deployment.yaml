@@ -20,13 +20,17 @@ spec:
       labels:
         {{- include "sso.selectorLabelsMedia" . | nindent 8 }}
     spec:
+      securityContext:
+        {{- toYaml .Values.media.podSecurityContext | nindent 8 }}
       containers:
         - name: nginx
+          securityContext:
+            {{- toYaml .Values.media.securityContext | nindent 12 }}
           image: "{{ .Values.media.image.repository }}:{{ .Values.media.image.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.media.containerPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
