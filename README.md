@@ -7,7 +7,6 @@ Helm charts for the g10f applications, published at https://g10f.github.io/helm-
 | `sso`        | [G10F Single Sign-On](https://github.com/g10f/sso): backend, messaging worker, media nginx, migration job, CronJobs |
 | `django-app` | Generic Django application (e.g. the OIDC client demo), optional media nginx    |
 | `wiki`       | Wiki with persistent storage, nginx in front of gunicorn                        |
-| `dummy`      | Test chart, not meant for use                                                   |
 
 ## Usage
 
